@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context="oxhammar.nicklas.run.Activities.DisplayFinishedRunActivity">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_weight="1"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/finishedRunMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="oxhammar.nicklas.run.Activities.DisplayFinishedRunActivity"
+        />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/finishedDurationTextView"
+            android:layout_marginTop="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:text="Duration - 0:00"
+
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="center_horizontal"
+            />
+
+
+        <TextView
+            android:id="@+id/finishedSpeedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:text="Average speed - 0 km/h"
+
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="center_horizontal"
+
+            />
+
+
+        <TextView
+            android:id="@+id/finishedDistanceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:text="Distance - 0.0 km"
+
+            android:layout_column="0"
+            android:layout_row="2"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_gravity="center_horizontal"
+
+            />
+    </GridLayout>
+
+
+</LinearLayout>

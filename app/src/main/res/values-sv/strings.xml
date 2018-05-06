@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Run</string>
+
+    <!-- Alerts -->
+    <string name="gps_disabled">Din GPS är av, sätt på telefonens plats-funktion och se till att läget inte är på batterisparläge.</string>
+    <string name="save_run_alert">Vill du spara denna runda?</string>
+    <string name="delete_run">Är du säker på att du vill ta bort denna runda?</string>
+    <string name="run_added">Runda tillagd!</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+
+    <!-- Tab names and activity names -->
+    <string name="tab_current_run">Nuvarande runda</string>
+    <string name="tab_finished_runs">Färdiga rundor</string>
+
+    <!-- Buttons -->
+    <string name="start_run_button">Spring</string>
+    <string name="stop_run_button">Stanna</string>
+
+    <!-- Display finished run activity-->
+    <string name="duration">Tid</string>
+    <string name="average_speed">Hastighet</string>
+    <string name="distance">Distans</string>
+    
+    <!-- Marker titles -->
+    <string name="start">Start</string>
+    <string name="end">Slut</string>
+
+    <!-- Foreground notification -->
+    <string name="stop_looking">Sluta kolla i telefonen, du ska ju springa!</string>
+
+</resources>

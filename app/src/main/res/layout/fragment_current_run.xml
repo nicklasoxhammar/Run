@@ -1,0 +1,101 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="oxhammar.nicklas.run.Fragments.CurrentRunFragment"
+    android:weightSum="6"
+    >
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:layout_weight="3"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:context="oxhammar.nicklas.run.Fragments.CurrentRunFragment"
+        />
+
+
+    <GridLayout
+        android:id="@+id/textViewGridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:rowCount="2"
+        android:columnCount="3"
+       >
+
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_marginTop="26dp"
+            android:layout_centerHorizontal="true"
+
+            android:textStyle="bold"
+            android:textColor="@color/colorGray"
+            android:textSize="40sp"
+            android:text="0:00"
+
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_gravity="center_horizontal"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            />
+
+
+        <TextView
+            android:id="@+id/speedTextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:textStyle="bold"
+            android:textColor="@color/colorGray"
+            android:textSize="30sp"
+            android:text="0 km/h"
+
+            android:layout_column="0"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:gravity="end"
+            />
+
+        <TextView
+            android:id="@+id/distanceTextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:textStyle="bold"
+            android:textColor="@color/colorGray"
+            android:textSize="30sp"
+            android:text="0.0 km"
+
+            android:layout_column="2"
+            android:layout_row="1"
+            android:gravity="start"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            />
+    </GridLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/runButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/start_button"
+            android:text="@string/start_run_button"
+            android:textAllCaps="false" />
+    </RelativeLayout>
+
+</LinearLayout>
