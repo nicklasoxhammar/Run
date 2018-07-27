@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static android.content.ContentValues.TAG;
 import static java.lang.Math.round;
@@ -28,7 +29,6 @@ public class FinishedRun {
 
     long id;
 
-
     public FinishedRun(Date date, Long duration, Double distance, ArrayList<LatLng> latLngList){
 
         this.date = date;
@@ -44,11 +44,10 @@ public class FinishedRun {
     public String getStringDuration() {
 
         long millis = duration;
-        int seconds = (int) (millis / 1000);
-        int minutes = seconds / 60;
-        seconds = seconds % 60;
 
-        return " - " + String.format("%d:%02d", minutes, seconds);
+        return " - " + String.format(String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)));
 
     }
 

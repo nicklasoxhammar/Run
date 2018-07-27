@@ -47,6 +47,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import oxhammar.nicklas.run.Activities.MainActivity;
 import oxhammar.nicklas.run.Constants;
@@ -100,11 +101,10 @@ public class CurrentRunFragment extends Fragment implements OnMapReadyCallback, 
         @Override
         public void run() {
             millis = System.currentTimeMillis() - runTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
 
-            timerTextView.setText(String.format("%d:%02d", minutes, seconds));
+            timerTextView.setText(String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)));
 
             timerHandler.postDelayed(this, 500);
         }
@@ -259,7 +259,7 @@ public class CurrentRunFragment extends Fragment implements OnMapReadyCallback, 
     }
 
 
-     @Override
+    @Override
     public void onLocationChanged(Location location) {
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -274,7 +274,7 @@ public class CurrentRunFragment extends Fragment implements OnMapReadyCallback, 
             speedTextView.setText(String.valueOf(round(location.getSpeed() * 3.6)) + " km/h");
 
             distanceTextView.setText(String.valueOf((double)round(mService.getDistanceTravelled() * 10) / 10) + " km");
-            }
+        }
 
 
         //locationManager.removeUpdates(this);
@@ -348,7 +348,7 @@ public class CurrentRunFragment extends Fragment implements OnMapReadyCallback, 
     public void resetTextViews(){
 
         runStarted = false;
-        timerTextView.setText("0:00");
+        timerTextView.setText("00:00:00");
         speedTextView.setText("0 km/h");
         distanceTextView.setText("0.0 km");
 
