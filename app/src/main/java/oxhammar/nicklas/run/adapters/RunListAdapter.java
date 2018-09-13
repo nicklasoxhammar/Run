@@ -33,19 +33,18 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHold
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView vRunDuration;
+        TextView runDurationTextView;
         View cardView;
         ImageButton deleteRunImageButton;
 
         ViewHolder(View v) {
             super(v);
 
-            vRunDuration = v.findViewById(R.id.run_card_duration_text);
+            runDurationTextView = v.findViewById(R.id.run_card_duration_text);
             cardView = v.findViewById(R.id.card_view_run);
             deleteRunImageButton = v.findViewById(R.id.deleteRunImageButton);
 
         }
-
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
@@ -73,7 +72,7 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHold
     public void onBindViewHolder(final RunListAdapter.ViewHolder holder, int position) {
         final FinishedRun finishedRun = runList.get(position);
 
-        holder.vRunDuration.setText(finishedRun.getStringDistanceAndDate());
+        holder.runDurationTextView.setText(finishedRun.getStringDistanceAndDate());
         holder.cardView.setTag(finishedRun.getStringDuration());
         holder.deleteRunImageButton.setTag(finishedRun.getDate().toString());
 
