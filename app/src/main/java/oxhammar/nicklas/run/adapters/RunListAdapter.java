@@ -1,4 +1,4 @@
-package oxhammar.nicklas.run.Adapters;
+package oxhammar.nicklas.run.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import oxhammar.nicklas.run.Activities.DisplayFinishedRunActivity;
+import oxhammar.nicklas.run.activities.DisplayFinishedRunActivity;
 import oxhammar.nicklas.run.DBHandler;
 import oxhammar.nicklas.run.FinishedRun;
 import oxhammar.nicklas.run.R;
@@ -25,34 +25,32 @@ import oxhammar.nicklas.run.R;
 
 public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHolder> {
 
-    DBHandler db;
+    private DBHandler db;
 
-    Context mContext;
-    LinearLayoutManager llm;
-    ArrayList<FinishedRun> runList;
+    private Context context;
+    private LinearLayoutManager llm;
+    private ArrayList<FinishedRun> runList;
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder  {
 
-        protected TextView vRunDuration;
-        protected View cardView;
-        protected ImageButton deleteRunImageButton;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView vRunDuration;
+        View cardView;
+        ImageButton deleteRunImageButton;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
 
-            vRunDuration = (TextView) v.findViewById(R.id.run_card_duration_text);
+            vRunDuration = v.findViewById(R.id.run_card_duration_text);
             cardView = v.findViewById(R.id.card_view_run);
             deleteRunImageButton = v.findViewById(R.id.deleteRunImageButton);
 
         }
 
     }
+
     // Provide a suitable constructor (depends on the kind of dataset)
     public RunListAdapter(Context context, LinearLayoutManager linearLayoutManager, ArrayList<FinishedRun> runList) {
-        mContext = context;
+        this.context = context;
         this.runList = runList;
         llm = linearLayoutManager;
 
@@ -61,12 +59,11 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHold
     // Create new views (invoked by the layout manager)
     @Override
     public RunListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.run_card_view, parent, false);
 
-        mContext = parent.getContext();
-        db = new DBHandler(mContext);
+        context = parent.getContext();
+        db = new DBHandler(context);
 
         return new ViewHolder(itemView);
     }
@@ -74,9 +71,6 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHold
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final RunListAdapter.ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-
         final FinishedRun finishedRun = runList.get(position);
 
         holder.vRunDuration.setText(finishedRun.getStringDistanceAndDate());
@@ -100,8 +94,7 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHold
     }
 
 
-    public void removeAt(int position) {
-
+    private void removeAt(int position) {
         db.deleteRun(runList.get(position).getId());
 
         runList.remove(position);
@@ -111,16 +104,16 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHold
     }
 
     private void buildAlertMessageDeleteRun(final int position) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setMessage(mContext.getString(R.string.delete_run))
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(context.getString(R.string.delete_run))
                 .setCancelable(false)
-                .setPositiveButton(mContext.getString(R.string.yes), new DialogInterface.OnClickListener() {
+                .setPositiveButton(context.getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
 
                         removeAt(position);
                     }
                 })
-                .setNegativeButton(mContext.getString(R.string.no), new DialogInterface.OnClickListener() {
+                .setNegativeButton(context.getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
                     }
@@ -134,11 +127,9 @@ public class RunListAdapter extends RecyclerView.Adapter<RunListAdapter.ViewHold
         return runList.size();
     }
 
-    public void displayFinishedRun(final FinishedRun run){
-
-        Intent myIntent = new Intent(mContext, DisplayFinishedRunActivity.class);
+    private void displayFinishedRun(final FinishedRun run) {
+        Intent myIntent = new Intent(context, DisplayFinishedRunActivity.class);
         myIntent.putExtra("runId", run.getId());
-        mContext.startActivity(myIntent);
-        
+        context.startActivity(myIntent);
     }
 }

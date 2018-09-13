@@ -26,6 +26,14 @@
     <string name="start">Start</string>
     <string name="end">End</string>
 
+    <!-- Text views -->
+    <string name="timer_text_view">00:00:00</string>
+    <string name="speed_text_view">0 km/h</string>
+    <string name="distance_text_view">0.0 km</string>
+
+    <!-- Content description -->
+    <string name="delete_button">Red delete image</string>
+
     <!-- Foreground notification -->
     <string name="stop_looking">Stop looking at your phone, you should be running!</string>
 

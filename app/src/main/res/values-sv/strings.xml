@@ -21,10 +21,18 @@
     <string name="duration">Tid</string>
     <string name="average_speed">Hastighet</string>
     <string name="distance">Distans</string>
-    
+
     <!-- Marker titles -->
     <string name="start">Start</string>
     <string name="end">Slut</string>
+
+    <!-- Text views -->
+    <string name="timer_text_view">00:00:00</string>
+    <string name="speed_text_view">0 km/h</string>
+    <string name="distance_text_view">0.0 km</string>
+
+    <!-- Content description -->
+    <string name="delete_button">Röd radera bild</string>
 
     <!-- Foreground notification -->
     <string name="stop_looking">Sluta kolla i telefonen, du ska ju springa!</string>

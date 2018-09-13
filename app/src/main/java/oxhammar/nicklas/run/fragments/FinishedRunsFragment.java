@@ -1,7 +1,6 @@
-package oxhammar.nicklas.run.Fragments;
+package oxhammar.nicklas.run.fragments;
 
 import android.content.Context;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,24 +11,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONStringer;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
 
-import oxhammar.nicklas.run.Adapters.RunListAdapter;
+import oxhammar.nicklas.run.adapters.RunListAdapter;
 import oxhammar.nicklas.run.DBHandler;
 import oxhammar.nicklas.run.FinishedRun;
 import oxhammar.nicklas.run.R;
@@ -39,20 +30,16 @@ import static android.content.ContentValues.TAG;
 
 public class FinishedRunsFragment extends Fragment {
 
-    static private DBHandler db;
+    private static DBHandler db;
 
-    RecyclerView runListRecyclerView;
-    RecyclerView.Adapter mAdapter;
+    private ArrayList<FinishedRun> runList;
+    private LinearLayoutManager layoutManager;
+    private RecyclerView.Adapter adapter;
 
-    ArrayList<FinishedRun> runList;
+    OnFragmentInteractionListener listener;
 
-    LinearLayoutManager mLayoutManager;
-
-
-    private OnFragmentInteractionListener mListener;
-
+    // Required empty public constructor
     public FinishedRunsFragment() {
-        // Required empty public constructor
     }
 
     public static FinishedRunsFragment newInstance() {
@@ -68,10 +55,11 @@ public class FinishedRunsFragment extends Fragment {
 
         db = new DBHandler(getContext());
 
-        runList = new ArrayList<FinishedRun>();
+        runList = new ArrayList<>();
 
         Gson gson = new Gson();
-        Type type = new TypeToken<FinishedRun>(){}.getType();
+        Type type = new TypeToken<FinishedRun>() {
+        }.getType();
 
         ArrayList<String> jsonRunList = db.getAllRuns();
 
@@ -82,8 +70,8 @@ public class FinishedRunsFragment extends Fragment {
 
         Collections.reverse(runList);
 
-        mLayoutManager = new LinearLayoutManager(getContext());
-        mAdapter = new RunListAdapter(getContext(), mLayoutManager, runList);
+        layoutManager = new LinearLayoutManager(getContext());
+        adapter = new RunListAdapter(getContext(), layoutManager, runList);
 
     }
 
@@ -97,24 +85,20 @@ public class FinishedRunsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        RecyclerView runListRecyclerView;
 
         runListRecyclerView = getView().findViewById(R.id.runList_recycler_view);
-        runListRecyclerView.setLayoutManager(mLayoutManager);
-        runListRecyclerView.setAdapter(mAdapter);
+        runListRecyclerView.setLayoutManager(layoutManager);
+        runListRecyclerView.setAdapter(adapter);
 
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+            listener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -124,18 +108,14 @@ public class FinishedRunsFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        listener = null;
     }
 
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-
-    public void addFinishedRunToRecyclerView(){
+    public void addFinishedRunToRecyclerView() {
 
         Gson gson = new Gson();
-        Type type = new TypeToken<FinishedRun>(){}.getType();
+        Type type = new TypeToken<FinishedRun>() {
+        }.getType();
 
         ArrayList<String> jsonRunList = db.getAllRuns();
 
@@ -146,16 +126,16 @@ public class FinishedRunsFragment extends Fragment {
 
             runList.add(0, run);
 
-            mAdapter.notifyItemInserted(0);
-            mAdapter.notifyDataSetChanged();
-        }
-        catch (IllegalStateException | JsonSyntaxException exception){
-
+            adapter.notifyItemInserted(0);
+            adapter.notifyDataSetChanged();
+        } catch (IllegalStateException | JsonSyntaxException exception) {
             Log.d(TAG, "addFinishedRunToRecyclerView: " + exception);
         }
 
+    }
 
-        
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
     }
 
 }

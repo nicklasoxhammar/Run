@@ -17,10 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".activities.MainActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait"
-            android:launchMode="singleInstance">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -38,14 +38,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".activities.DisplayFinishedRunActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
 
-        <activity android:name=".Activities.DisplayFinishedRunActivity"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait" />
+        </activity>
 
-        <service
-            android:name=".Fragments.ForegroundService">
-            </service>
+        <service android:name=".fragments.ForegroundService" />
     </application>
 
 </manifest>

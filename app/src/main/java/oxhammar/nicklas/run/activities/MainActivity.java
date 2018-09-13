@@ -1,24 +1,21 @@
-package oxhammar.nicklas.run.Activities;
+package oxhammar.nicklas.run.activities;
 
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import oxhammar.nicklas.run.Fragments.CurrentRunFragment;
-import oxhammar.nicklas.run.Fragments.FinishedRunsFragment;
+
+import oxhammar.nicklas.run.fragments.CurrentRunFragment;
+import oxhammar.nicklas.run.fragments.FinishedRunsFragment;
 import oxhammar.nicklas.run.R;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
-import android.view.View;
 
 
 public class MainActivity extends AppCompatActivity implements CurrentRunFragment.OnFragmentInteractionListener, FinishedRunsFragment.OnFragmentInteractionListener {
-
-
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
 
     FinishedRunsFragment finishedRunsFragment;
 
@@ -27,23 +24,25 @@ public class MainActivity extends AppCompatActivity implements CurrentRunFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SectionsPagerAdapter sectionsPagerAdapter;
+        ViewPager viewPager;
+
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        viewPager = findViewById(R.id.container);
+        viewPager.setAdapter(sectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
 
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -53,10 +52,10 @@ public class MainActivity extends AppCompatActivity implements CurrentRunFragmen
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return PlaceholderFragment.newInstance(position + 1);
 
-            if (position == 0){
+            if (position == 0) {
                 return CurrentRunFragment.newInstance();
-            }else{
-                finishedRunsFragment = finishedRunsFragment.newInstance();
+            } else {
+                finishedRunsFragment = FinishedRunsFragment.newInstance();
                 return finishedRunsFragment;
             }
 
@@ -68,15 +67,19 @@ public class MainActivity extends AppCompatActivity implements CurrentRunFragmen
         }
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-
-    public void addFinishedRun(){
+    public void addFinishedRun() {
 
         finishedRunsFragment.addFinishedRunToRecyclerView();
+    }
+
+    //Don't destroy activity on back button pressed
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
     }
 
 }

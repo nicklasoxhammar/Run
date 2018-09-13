@@ -3,21 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="oxhammar.nicklas.run.Fragments.CurrentRunFragment"
     android:weightSum="6"
-    >
+    tools:context="oxhammar.nicklas.run.fragments.CurrentRunFragment">
 
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
-        android:layout_weight="3"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:context="oxhammar.nicklas.run.Fragments.CurrentRunFragment"
-        />
+        android:layout_weight="3"
+        tools:context="oxhammar.nicklas.run.fragments.CurrentRunFragment" />
 
 
     <RelativeLayout
@@ -25,44 +22,37 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:rowCount="2"
         android:columnCount="3"
-        >
+        android:rowCount="2">
 
         <TextView
             android:id="@+id/timerTextView"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
 
-            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:text="@string/timer_text_view"
             android:textColor="@color/colorGray"
             android:textSize="40sp"
-            android:text="00:00:00"
 
-            android:layout_column="1"
-            android:layout_row="0"
-            android:layout_gravity="center_horizontal"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            />
+            android:textStyle="bold" />
 
 
         <TextView
             android:id="@+id/speedTextView"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-
-            android:textStyle="bold"
-            android:textColor="@color/colorGray"
-            android:textSize="30sp"
-            android:text="0 km/h"
-            android:layout_toEndOf="@+id/marginButton"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
 
             android:layout_below="@id/timerTextView"
-            />
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/marginButton"
+            android:text="@string/speed_text_view"
+            android:textColor="@color/colorGray"
+            android:textSize="30sp"
+
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/marginButton"
@@ -70,22 +60,21 @@
             android:layout_height="20dp"
             android:layout_centerHorizontal="true"
             android:clickable="false"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/distanceTextView"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/timerTextView"
             android:layout_marginTop="20dp"
-            android:layout_toStartOf="@+id/marginButton"
 
-            android:textStyle="bold"
+            android:layout_toStartOf="@+id/marginButton"
+            android:text="@string/distance_text_view"
             android:textColor="@color/colorGray"
             android:textSize="30sp"
-            android:text="0.0 km"
 
-            android:layout_below="@id/timerTextView"
-            />
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout

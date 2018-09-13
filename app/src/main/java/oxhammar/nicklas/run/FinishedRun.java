@@ -1,19 +1,13 @@
 package oxhammar.nicklas.run;
 
-import android.content.res.Resources;
-import android.location.Location;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
-
 import com.google.android.gms.maps.model.LatLng;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import static android.content.ContentValues.TAG;
 import static java.lang.Math.round;
 
 /**
@@ -22,14 +16,14 @@ import static java.lang.Math.round;
 
 public class FinishedRun {
 
-    Date date;
-    Long duration;
-    Double distance;
-    ArrayList<LatLng> latLngList;
+    private Date date;
+    private Long duration;
+    private Double distance;
+    private ArrayList<LatLng> latLngList;
 
-    long id;
+    private long id;
 
-    public FinishedRun(Date date, Long duration, Double distance, ArrayList<LatLng> latLngList){
+    public FinishedRun(Date date, Long duration, Double distance, ArrayList<LatLng> latLngList) {
 
         this.date = date;
         this.duration = duration;
@@ -45,12 +39,11 @@ public class FinishedRun {
 
         long millis = duration;
 
-        return " - " + String.format(String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+        return " - " + String.format(Locale.getDefault(), "%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
-                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1)));
+                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
 
     }
-
 
     public ArrayList<LatLng> getLatLngList() {
         return latLngList;
@@ -62,33 +55,32 @@ public class FinishedRun {
 
         double averageSpeed = distance / durationInHours;
 
-        if((int) round(averageSpeed) > 0) {
+        if ((int) round(averageSpeed) > 0) {
             return " - " + String.valueOf((int) round(averageSpeed) + " km/h");
-        }else{
+        } else {
             return " - 0 km/h";
         }
     }
 
-    public void setId(long id){
+    public void setId(long id) {
         this.id = id;
     }
 
-    public long getId(){
+    public long getId() {
 
         return id;
     }
 
-    public String getStringDistanceAndDate(){
+    public String getStringDistanceAndDate() {
 
-        String dateString = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        String dateString = new SimpleDateFormat("dd/MM/yyyy", Locale.US).format(date);
 
-        return (String.valueOf((double)round(distance * 10) / 10) + " km   |   " + dateString);
+        return (String.valueOf((double) round(distance * 10) / 10) + " km   |   " + dateString);
     }
 
-    public String getStringDistance(){
-        return " - " + String.valueOf((double)round(distance * 10) / 10) + " km";
+    public String getStringDistance() {
+        return " - " + String.valueOf((double) round(distance * 10) / 10) + " km";
     }
-
 
 
 }
